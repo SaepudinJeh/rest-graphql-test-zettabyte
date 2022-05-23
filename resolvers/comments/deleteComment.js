@@ -10,6 +10,12 @@ const deleteComment = async (parent, { id }, context, info) => {
       return "ID Article Not Valid!"
     }
 
+    const checkDataExist =  await Comment.findById(id);
+
+    if (!checkDataExist) {
+      return "Data does not exist"
+    }
+
     await Comment.findByIdAndDelete(id);
 
     return "Delete comment successfully";

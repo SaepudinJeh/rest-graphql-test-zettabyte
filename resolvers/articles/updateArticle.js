@@ -12,11 +12,16 @@ const updateArticle = async (parent, args, context, info) => {
     return "ID Article Not Valid!"
   }
 
+  const checkExistArticle = await Article.findById(id);
+
+  if (!checkExistArticle) {
+    return "Data does not exist"
+  }
+
   await Article.findByIdAndUpdate(id, 
     {
       title,
-      description,
-      updateAt: Date.now()
+      description
     },
     { new: true }
   )

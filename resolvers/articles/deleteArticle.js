@@ -8,6 +8,13 @@ const deleteArticle = async (parent, { id }, context, info) => {
     return "ID Article Not Valid";
   }
 
+  const checkExistArticle = await Article.findById(id);
+
+  if (!checkExistArticle) {
+    return "Data does not exist"
+  }
+
+  // delete article and all comments
   await Article.findByIdAndDelete(id)
   await Comment.deleteMany({ idArticle: id })
 

@@ -11,11 +11,16 @@ const updateComment = async (parent, args, context, info) => {
     return "ID Article Not Valid!"
   }
 
+  const checkDataExist =  await Comment.findById(id);
+
+    if (!checkDataExist) {
+      return "Data does not exist"
+    }
+
   await Comment.findByIdAndUpdate(id, 
     {
       name,
-      comment,
-      updateAt: Date.now()
+      comment
     },
     { new: true }
   )

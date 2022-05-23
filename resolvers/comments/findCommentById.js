@@ -10,6 +10,12 @@ const findCommentById = async (parent, { id }, context, info) => {
       return "ID Article Not Valid!"
     }
 
+    const checkDataExist =  await Comment.findById(id);
+
+    if (!checkDataExist) {
+      return "Data does not exist"
+    }
+
     return await Comment.findById(id)
   } catch (error) {
     return error.errors

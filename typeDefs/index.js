@@ -1,13 +1,6 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql `
-  type PageInfo {
-    totalDocs: String,
-    limit: Int,
-    page: Int,
-    hasPrevPage: Boolean
-    hasNextPage: Boolean
-  }
 
   type Article {
     id: ID!,
@@ -28,12 +21,11 @@ const typeDefs = gql `
 
   type Query {
     getArticles(page: Int): [Article]
-    pageInfo: PageInfo
 
-    findArticleById(id: ID) : Article!
+    findArticleById(id: ID) : Article
 
-    findCommentById(id: ID) : Comment!
-    findCommentByArticle(idArticle: String) : [Comment]!
+    findCommentById(id: ID) : Comment
+    findCommentByArticle(idArticle: String) : [Comment]
   }
 
   input createArticleInput {

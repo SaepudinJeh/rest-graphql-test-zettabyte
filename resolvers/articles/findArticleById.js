@@ -10,7 +10,13 @@ const findArticleById = async (parent, { id }, context, info) => {
     return "ID Article Not Valid!"
   }
 
-  return await Article.findById(id)
+  const checkExistArticle = await Article.findById(id);
+
+  if (!checkExistArticle) {
+    return "Data does not exist"
+  }
+
+  return checkExistArticle
 }
 
 module.exports = findArticleById;
